@@ -6,8 +6,10 @@ const program = new Command();
 
 program
   .name("gendiff")
-  .description("Compara dos archivos y muestra la diferencia.")
+  .description("Compares two configuration files and shows a difference.")
   .version("1.0.0")
-  .helpOption("-h, --help", "Muestra información de ayuda");
+  .arguments("<filepath1> <filepath2>") 
+  .option("-f, --format <type>", "output format") 
+  .helpOption("-h, --help", "output usage information");
 
 program.parse(process.argv);
