@@ -1,5 +1,6 @@
 const path = require("path");
 const { readFileSync } = require("fs");
+const _ = require("lodash");
 const { getFileExtension, parseFileData } = require("./fileUtils.js");
 
 const genDiff = (filepath1, filepath2, format) => {
@@ -23,10 +24,29 @@ const genDiff = (filepath1, filepath2, format) => {
   const data1 = parseFileData(fileData1, ext1);
   const data2 = parseFileData(fileData2, ext2);
 
-  // Comparar objetos (esto puede mejorarse)
-  return JSON.stringify(data1) === JSON.stringify(data2)
-    ? "Los archivos son iguales."
-    : "Los archivos tienen diferencias.";
+  // Obtener las claves de ambos archivos y ordenarlas alfabéticamente
+  const allKeys = _.union(Object.keys(data1), Object.keys(data2)).sort();
+
+   // Generar las diferencias
+  const diff = allKeys.map((key) => {
+    if (!data2.hasOwnProperty(key)) {
+      // Si la clave está solo en el primer archivo
+      return `  - ${key}: ${data1[key]}`;
+    }
+    if (!data1.hasOwnProperty(key)) {
+      // Si la clave está solo en el segundo archivo
+      return `  + ${key}: ${data2[key]}`;
+    }
+    if (data1[key] !== data2[key]) {
+      // Si los valores de la clave son diferentes
+      return `  - ${key}: ${data1[key]}\n  + ${key}: ${data2[key]}`;
+    }
+    // Si las claves y valores son iguales
+    return null;
+  }).filter(line => line !== null).join("\n");
+
+  // Si no hay diferencias, indicar que los archivos son iguales
+  return diff.length > 0 ? diff : "Los archivos son iguales.";
 };
 
 module.exports = genDiff;
