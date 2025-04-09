@@ -1,2 +1,6 @@
+# Makefile
+
+.PHONY: lint
+
 lint:
-  eslint .
+	npm run lint
