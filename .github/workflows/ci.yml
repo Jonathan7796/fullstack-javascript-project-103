@@ -11,6 +11,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -23,24 +24,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Download Code Climate test reporter
-        run: |
-          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-          chmod +x ./cc-test-reporter
-
-       # Verificar si el secreto está configurado correctamente
-      - name: Verify if CC_TEST_REPORTER_ID is set
-        run: echo "CC_TEST_REPORTER_ID is set to ${{ secrets.QLTY_COVERAGE_TOKEN }}" || echo "CC_TEST_REPORTER_ID is not set"
-
-      - name: Notify Code Climate before build
-        run: ./cc-test-reporter before-build
-        env:
-         CC_TEST_REPORTER_ID: ${{ secrets.QLTY_COVERAGE_TOKEN }}
-
-      - name: Run tests with coverage
+      - name: Run tests and generate coverage
         run: npm run test -- --coverage
 
-      - name: Upload coverage to Code Climate
-        run: ./cc-test-reporter after-build --exit-code $?
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+      - name: Upload coverage to Qlty
+        uses: qltysh/qlty-action/coverage@main
+        with:
+          coverage-token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+          files: coverage/lcov.info
