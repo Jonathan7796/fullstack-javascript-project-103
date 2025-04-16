@@ -1,3 +1,13 @@
+name: Run tests and coverage
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -21,4 +31,5 @@ jobs:
         with:
           coverage-command: npm run test -- --coverage
         env:
-          CC_TEST_REPORTER_ID: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+          CC_TEST_REPORTER_ID: ${{secrets.QLTY_COVERAGE_TOKEN }}
+
