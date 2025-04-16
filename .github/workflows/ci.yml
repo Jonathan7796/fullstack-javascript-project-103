@@ -28,10 +28,14 @@ jobs:
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
           chmod +x ./cc-test-reporter
 
+       # Verificar si el secreto está configurado correctamente
+      - name: Verify if CC_TEST_REPORTER_ID is set
+        run: echo "CC_TEST_REPORTER_ID is set to ${{ secrets.QLTY_COVERAGE_TOKEN }}" || echo "CC_TEST_REPORTER_ID is not set"
+
       - name: Notify Code Climate before build
         run: ./cc-test-reporter before-build
         env:
-          CC_TEST_REPORTER_ID: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+         CC_TEST_REPORTER_ID: ${{ secrets.QLTY_COVERAGE_TOKEN }}
 
       - name: Run tests with coverage
         run: npm run test -- --coverage
@@ -40,4 +44,3 @@ jobs:
         run: ./cc-test-reporter after-build --exit-code $?
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.QLTY_COVERAGE_TOKEN }}
-
