@@ -16,8 +16,9 @@ describe('genDiff', () => {
   
   it('debería comparar correctamente dos archivos YAML con diferencias', () => {
     const diff = genDiff(yamlFile1Path, yamlFile2Path);
-    expect(diff).toContain('  - key2: value2');
-    expect(diff).toContain('  + key2: value3');
+    expect(diff).toContain('  - timeout: 50');
+    expect(diff).toContain('  + timeout: 20');
+    expect(diff).toContain('  + verbose: true');
   });
   //
   it('debería comparar correctamente dos archivos JSON con diferencias', () => {
