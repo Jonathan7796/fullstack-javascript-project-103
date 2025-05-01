@@ -11,10 +11,15 @@ program
   .version("1.0.0")
   .arguments("<filepath1> <filepath2>") 
   .option("-f, --format <type>", "output format", "stylish") // Opción para el formato de salida
-  .action((filepath1, filepath2, options) => {
-    const diff = genDiff(filepath1, filepath2, options.format);
-    console.log(diff);
-  }) 
+  .action((filepath1, filepath2) => {
+    try {
+      const diff = genDiff(filepath1, filepath2);
+      console.log(diff);
+    } catch (err) {
+      console.error(`Error: ${err.message}`);
+      process.exit(1);
+    }
+  })
   .helpOption("-h, --help", "output usage information");
 
 program.parse(process.argv);

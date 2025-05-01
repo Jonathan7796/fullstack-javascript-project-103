@@ -3,7 +3,7 @@ const { readFileSync } = require("fs");
 const _ = require("lodash");
 const { getFileExtension, parseFileData } = require("./fileUtils.js");
 
-const genDiff = (filepath1, filepath2, format) => {
+const genDiff = (filepath1, filepath2) => {
   // Convertir rutas a absolutas
   const absPath1 = path.resolve(process.cwd(), filepath1);
   const absPath2 = path.resolve(process.cwd(), filepath2);
@@ -43,7 +43,7 @@ const genDiff = (filepath1, filepath2, format) => {
     }
     // Si las claves y valores son iguales
     return null;
-  }).filter(line => line !== null).join("\n");
+  }).filter(Boolean).join("\n");
 
   // Si no hay diferencias, indicar que los archivos son iguales
   return diff.length > 0 ? diff : "Los archivos son iguales.";
