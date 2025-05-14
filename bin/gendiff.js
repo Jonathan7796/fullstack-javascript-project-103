@@ -11,9 +11,9 @@ program
   .version("1.0.0")
   .arguments("<filepath1> <filepath2>") 
   .option("-f, --format <type>", "output format", "stylish") // Opción para el formato de salida
-  .action((filepath1, filepath2) => {
+  .action((filepath1, filepath2, options) => {
     try {
-      const diff = genDiff(filepath1, filepath2);
+      const diff = genDiff(filepath1, filepath2, options.format); // Pasar el formato
       console.log(diff);
     } catch (err) {
       console.error(`Error: ${err.message}`);
