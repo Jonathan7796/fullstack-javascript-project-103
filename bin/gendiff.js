@@ -13,7 +13,7 @@ program
   .option("-f, --format <type>", "output format", "stylish") // Opción para el formato de salida
   .action((filepath1, filepath2, options) => {
     try {
-      const diff = genDiff(filepath1, filepath2, options.format); // Pasar el formato
+      const diff = genDiff(filepath1, filepath2, options.format).trim(); // Pasar el formato
       console.log(diff);
     } catch (err) {
       console.error(`Error: ${err.message}`);

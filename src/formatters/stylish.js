@@ -1,45 +1,49 @@
+const indentSize = 4;
+const getIndent = (depth) => ' '.repeat(depth * indentSize-2); // Sin restar 2
+const getBracketIndent = (depth) => ' '.repeat(depth * indentSize);
+
 const stringify = (value, depth) => {
-  if (!value || typeof value !== 'object' || Array.isArray(value)) {
-    return String(value);
-  }
+  if (value === null) return 'null';
+  if (typeof value !== 'object') return String(value);
 
-  const indentSize = depth * 4;
-  const currentIndent = ' '.repeat(indentSize);
-  const bracketIndent = ' '.repeat(indentSize - 4);
-
-  const lines = Object.entries(value).map(
-    ([key, val]) => `${currentIndent}${key}: ${stringify(val, depth + 1)}`
+  const entries = Object.entries(value);
+  const lines = entries.map(
+    ([key, val]) =>
+      `${getBracketIndent(depth + 1)}${key}: ${stringify(val, depth + 1)}`
   );
 
-  return `{\n${lines.join('\n')}\n${bracketIndent}}`;
+  return `{\n${lines.join('\n')}\n${getBracketIndent(depth)}}`;
 };
 
-const formatStylish = (diffTree, depth = 1) => {
-  const indentSize = depth * 4;
-  const currentIndent = ' '.repeat(indentSize - 2);
-  const bracketIndent = ' '.repeat(indentSize - 4);
+const formatStylish = (tree, depth = 1) => {
+  const lines = tree.map((node) => {
+    const indent = getIndent(depth);
+    const {
+      key, status, value, value1, value2, children,
+    } = node;
 
-  const lines = diffTree.map((node) => {
-    switch (node.status) {
+    switch (status) {
       case 'added':
-        return `${currentIndent}+ ${node.key}: ${stringify(node.value, depth)}`;
+        return `${indent}+ ${key}: ${stringify(value, depth)}`;
       case 'removed':
-        return `${currentIndent}- ${node.key}: ${stringify(node.value, depth)}`;
+        return `${indent}- ${key}: ${stringify(value, depth)}`;
       case 'unchanged':
-        return `${currentIndent}  ${node.key}: ${stringify(node.value, depth)}`;
+        return `${indent}  ${key}: ${stringify(value, depth)}`;
       case 'changed':
         return [
-          `${currentIndent}- ${node.key}: ${stringify(node.oldValue, depth)}`,
-          `${currentIndent}+ ${node.key}: ${stringify(node.newValue, depth)}`
+          `${indent}- ${key}: ${stringify(value1, depth)}`,
+          `${indent}+ ${key}: ${stringify(value2, depth)}`,
         ].join('\n');
       case 'nested':
-        return `${currentIndent}  ${node.key}: {\n${formatStylish(node.children, depth + 1)}\n${' '.repeat(indentSize)}  }`;
+        return `${indent}  ${key}: ${formatStylish(children, depth + 1)}`;
       default:
-        throw new Error(`Unknown status: ${node.status}`);
+        throw new Error(`Unknown status: ${status}`);
     }
   });
 
-  return lines.join('\n');
+  return `{\n${lines.join('\n')}\n${getBracketIndent(depth - 1)}}`;
 };
 
-module.exports = (diffTree) => `{\n${formatStylish(diffTree)}\n}`;
+module.exports = {
+  genDiffStylish: formatStylish,
+};
