@@ -10,7 +10,7 @@ parserOptions:
 
 globals:
   PR: true
-
+  "structuredClone": "readonly"
 extends:
   - eslint:recommended
   - plugin:jest/recommended
