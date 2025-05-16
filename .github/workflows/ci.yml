@@ -23,6 +23,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        
+      - name: Install structuredClone polyfill
+        run: npm install structured-clone
 
       - name: Run ESLint and fix issues
         run: npx eslint . --fix
