@@ -28,7 +28,7 @@ const genDiff = (filepath1, filepath2, format="stylish") => {
 
   const diffTree = buildDiff(data1, data2);
   const formatter = getFormatter(format);
-  // Solo 'stylish' por ahora
+
   return formatter(diffTree);
 };
 

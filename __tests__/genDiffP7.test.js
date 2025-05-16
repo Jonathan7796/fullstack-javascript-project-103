@@ -42,3 +42,21 @@ test("gendiff YAML nested plain", () => {
 
   expect(result).toBe(expected);
 });
+test("gendiff JSON nested json", () => {
+  const file1 = getFixturePath("file1_p7.json");
+  const file2 = getFixturePath("file2_p7.json");
+
+  const result = genDiff(file1, file2, "json").trim();
+  const expected = readFile("expectedJson.txt").trim();
+
+  expect(result).toBe(expected);
+});
+test("gendiff YAML nested json", () => {
+  const file1 = getFixturePath("file1_p7.yaml");
+  const file2 = getFixturePath("file2_p7.yaml");
+
+  const result = genDiff(file1, file2, "json").trim();
+  const expected = readFile("expectedJson.txt").trim();
+
+  expect(result).toBe(expected);
+});

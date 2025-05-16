@@ -14,3 +14,5 @@ Este es un ejemplo del funcionamiento de mi paquete una vez completado el paso 4
 [![asciinema](https://asciinema.org/a/LYFt4PotrVuKxCdt4jSZqhAIr.svg)](https://asciinema.org/a/LYFt4PotrVuKxCdt4jSZqhAIr)
 # Ejemplo de uso de mi paquete en el Paso 8
 [![asciinema](https://asciinema.org/a/1jUn8oqpeB9NXaBK5GJEM6JUT.svg)](https://asciinema.org/a/1jUn8oqpeB9NXaBK5GJEM6JUT)
+# Ejemplo de uso de mi paquete en el Paso 9
+[![asciinema](https://asciinema.org/a/gYtcxWxv4yShTONGSzLJB7LD1.svg)](https://asciinema.org/a/gYtcxWxv4yShTONGSzLJB7LD1)
