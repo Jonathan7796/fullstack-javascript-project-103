@@ -10,7 +10,7 @@ parserOptions:
 
 globals:
   PR: true
-  "structuredClone": "readonly"
+  structuredClone: "readonly"
 extends:
   - eslint:recommended
   - plugin:jest/recommended
@@ -23,7 +23,7 @@ rules:
   semi: [error, always]
   no-unused-vars: ["warn", { "varsIgnorePattern": "^_" }]
   no-prototype-builtins: off
-  "no-console": "off"
+  no-console: "off"
   no-useless-escape: off
   fp/no-mutation: off  # Desactiva errores por mutación
   fp/no-let: off
@@ -33,7 +33,7 @@ rules:
   indent: [error, 2]
   comma-dangle: [error, 'always-multiline']
   space-infix-ops: error
-
+  jest/expect-expect: 'off'
 
 ignorePatterns:
   - coverage/
