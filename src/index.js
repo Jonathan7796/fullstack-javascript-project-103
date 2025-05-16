@@ -3,8 +3,7 @@ const { readFileSync } = require("fs");
 const _ = require("lodash");
 const { getFileExtension, parseFileData } = require("./fileUtils.js");
 const buildDiff = require("./buildDiff.js");
-//const formatStylish = require("./formatters/stylish.js");
-const { genDiffStylish } = require("./formatters/stylish.js");
+const getFormatter = require("./formatters/index.js");
 
 const genDiff = (filepath1, filepath2, format="stylish") => {
   // Convertir rutas a absolutas
@@ -28,9 +27,9 @@ const genDiff = (filepath1, filepath2, format="stylish") => {
   const data2 = parseFileData(fileData2, ext2);
 
   const diffTree = buildDiff(data1, data2);
-
+  const formatter = getFormatter(format);
   // Solo 'stylish' por ahora
-  return genDiffStylish(diffTree);
+  return formatter(diffTree);
 };
 
 module.exports = genDiff;
