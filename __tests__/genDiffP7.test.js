@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const genDiff = require('../src/index');
+const genDiff = require('../src/index.js');
 
 const getFixturePath = (filename) => path.join(__dirname, '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf8');

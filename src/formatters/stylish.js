@@ -8,8 +8,7 @@ const stringify = (value, depth) => {
 
   const entries = Object.entries(value);
   const lines = entries.map(
-    ([key, val]) =>
-      `${getBracketIndent(depth + 1)}${key}: ${stringify(val, depth + 1)}`,
+    ([key, val]) => `${getBracketIndent(depth + 1)}${key}: ${stringify(val, depth + 1)}`,
   );
 
   return `{\n${lines.join('\n')}\n${getBracketIndent(depth)}}`;
@@ -23,21 +22,21 @@ const formatStylish = (tree, depth = 1) => {
     } = node;
 
     switch (status) {
-    case 'added':
-      return `${indent}+ ${key}: ${stringify(value, depth)}`;
-    case 'removed':
-      return `${indent}- ${key}: ${stringify(value, depth)}`;
-    case 'unchanged':
-      return `${indent}  ${key}: ${stringify(value, depth)}`;
-    case 'changed':
-      return [
-        `${indent}- ${key}: ${stringify(value1, depth)}`,
-        `${indent}+ ${key}: ${stringify(value2, depth)}`,
-      ].join('\n');
-    case 'nested':
-      return `${indent}  ${key}: ${formatStylish(children, depth + 1)}`;
-    default:
-      throw new Error(`Unknown status: ${status}`);
+      case 'added':
+        return `${indent}+ ${key}: ${stringify(value, depth)}`;
+      case 'removed':
+        return `${indent}- ${key}: ${stringify(value, depth)}`;
+      case 'unchanged':
+        return `${indent}  ${key}: ${stringify(value, depth)}`;
+      case 'changed':
+        return [
+          `${indent}- ${key}: ${stringify(value1, depth)}`,
+          `${indent}+ ${key}: ${stringify(value2, depth)}`,
+        ].join('\n');
+      case 'nested':
+        return `${indent}  ${key}: ${formatStylish(children, depth + 1)}`;
+      default:
+        throw new Error(`Unknown status: ${status}`);
     }
   });
 

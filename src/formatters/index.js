@@ -4,14 +4,14 @@ const { genDiffJson } = require('./json.js');
 
 const getFormatter = (format) => {
   switch (format) {
-  case 'stylish':
-    return genDiffStylish;
-  case 'plain':
-    return genDiffPlain;
-  case 'json':
-    return genDiffJson;
-  default:
-    throw new Error(`Unknown format: ${format}`);
+    case 'stylish':
+      return genDiffStylish;
+    case 'plain':
+      return genDiffPlain;
+    case 'json':
+      return genDiffJson;
+    default:
+      throw new Error(`Unknown format: ${format}`);
   }
 };
 

@@ -7,7 +7,10 @@ const buildDiff = (obj1, obj2) => {
     const value1 = obj1[key];
     const value2 = obj2[key];
 
-    if (_.isObject(value1) && _.isObject(value2) && !Array.isArray(value1) && !Array.isArray(value2)) {
+    if (_.isObject(value1)
+     && _.isObject(value2) && !Array.isArray(value1)
+     && !Array.isArray(value2)
+    ) {
       return {
         key,
         status: 'nested',
@@ -24,7 +27,9 @@ const buildDiff = (obj1, obj2) => {
     }
 
     if (!_.isEqual(value1, value2)) {
-      return { key, status: 'changed', value1, value2 };
+      return {
+        key, status: 'changed', value1, value2,
+      };
     }
 
     return { key, status: 'unchanged', value: value1 };

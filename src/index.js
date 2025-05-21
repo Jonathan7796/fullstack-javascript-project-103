@@ -1,6 +1,5 @@
 const path = require('path');
 const { readFileSync } = require('fs');
-const _ = require('lodash');
 const { getFileExtension, parseFileData } = require('./fileUtils.js');
 const buildDiff = require('./buildDiff.js');
 const getFormatter = require('./formatters/index.js');
