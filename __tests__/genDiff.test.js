@@ -1,5 +1,5 @@
-const path = require('path');
-const genDiff = require('../src/index.js'); // Ajusta si tu estructura cambia
+import path from 'path';
+import genDiff from '../src/index.js'; // Ajusta si tu estructura cambia
 
 describe('genDiff', () => {
   const fixturesPath = path.join(__dirname, '__fixtures__');

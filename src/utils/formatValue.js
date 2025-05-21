@@ -6,4 +6,4 @@ const formatValue = (value) => {
   return String(value);
 };
 
-module.exports = formatValue;
+export default formatValue;
