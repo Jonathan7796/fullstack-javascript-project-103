@@ -1,4 +1,4 @@
-const _ = require('lodash');
+import _ from 'lodash';
 
 const buildDiff = (obj1, obj2) => {
   const keys = _.sortBy(_.union(Object.keys(obj1), Object.keys(obj2)));
@@ -36,4 +36,4 @@ const buildDiff = (obj1, obj2) => {
   });
 };
 
-module.exports = buildDiff;
+export default buildDiff;

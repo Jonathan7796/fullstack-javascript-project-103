@@ -1,8 +1,8 @@
-const path = require('path');
-const { readFileSync } = require('fs');
-const { getFileExtension, parseFileData } = require('./fileUtils.js');
-const buildDiff = require('./buildDiff.js');
-const getFormatter = require('./formatters/index.js');
+import path from 'path';
+import { readFileSync } from 'fs';
+import { getFileExtension, parseFileData } from './fileUtils.js';
+import buildDiff from './buildDiff.js';
+import getFormatter from './formatters/index.js';
 
 const genDiff = (filepath1, filepath2, format = 'stylish') => {
   // Convertir rutas a absolutas
@@ -31,4 +31,4 @@ const genDiff = (filepath1, filepath2, format = 'stylish') => {
   return formatter(diffTree);
 };
 
-module.exports = genDiff;
+export default genDiff;

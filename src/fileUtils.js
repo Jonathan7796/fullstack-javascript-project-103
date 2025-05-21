@@ -1,10 +1,10 @@
-const path = require('path');
-const yaml = require('js-yaml');
+import path from 'path';
+import yaml from 'js-yaml';
 
 // eslint-disable-next-line max-len
-const getFileExtension = (filepath) => path.extname(filepath).slice(1); // Extrae la extensión del archivo
+export const getFileExtension = (filepath) => path.extname(filepath).slice(1); // Extrae la extensión del archivo
 
-const parseFileData = (data, format) => {
+export const parseFileData = (data, format) => {
   switch (format) {
     case 'json':
       return JSON.parse(data);
@@ -14,9 +14,4 @@ const parseFileData = (data, format) => {
     default:
       throw new Error(`Formato no soportado: ${format}`);
   }
-};
-
-module.exports = {
-  getFileExtension,
-  parseFileData,
 };

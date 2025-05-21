@@ -1,4 +1,4 @@
-const formatValue = require('../utils/formatValue.js');
+import formatValue from '../utils/formatValue.js';
 
 const formatPlain = (tree, parent = '') => {
   const lines = tree.flatMap((node) => {
@@ -21,6 +21,4 @@ const formatPlain = (tree, parent = '') => {
   return lines.join('\n');
 };
 
-module.exports = {
-  genDiffPlain: formatPlain,
-};
+export default formatPlain;

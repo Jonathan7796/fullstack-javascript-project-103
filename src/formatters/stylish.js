@@ -43,6 +43,4 @@ const formatStylish = (tree, depth = 1) => {
   return `{\n${lines.join('\n')}\n${getBracketIndent(depth - 1)}}`;
 };
 
-module.exports = {
-  genDiffStylish: formatStylish,
-};
+export default formatStylish;

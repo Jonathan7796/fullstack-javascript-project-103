@@ -1,6 +1,6 @@
-const { genDiffStylish } = require('./stylish.js');
-const { genDiffPlain } = require('./plain.js');
-const { genDiffJson } = require('./json.js');
+import genDiffStylish from './stylish.js';
+import genDiffPlain from './plain.js';
+import genDiffJson from './json.js';
 
 const getFormatter = (format) => {
   switch (format) {
@@ -15,4 +15,4 @@ const getFormatter = (format) => {
   }
 };
 
-module.exports = getFormatter;
+export default getFormatter;
