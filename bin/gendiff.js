@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import Command from 'commander';
+import { Command } from 'commander';
 import genDiff from '../src/index.js'; // Importamos la función principal
 
 const program = new Command();

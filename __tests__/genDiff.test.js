@@ -1,6 +1,9 @@
 import path from 'path';
+import { fileURLToPath } from 'url';
 import genDiff from '../src/index.js'; // Ajusta si tu estructura cambia
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 describe('genDiff', () => {
   const fixturesPath = path.join(__dirname, '__fixtures__');
 
